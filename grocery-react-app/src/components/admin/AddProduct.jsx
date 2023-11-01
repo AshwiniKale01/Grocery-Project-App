@@ -18,7 +18,9 @@ const AddProduct = () => {
       image,
     };
 
-    addProduct(product).then((resp) => {});
+    addProduct(product).then((resp) => {
+      window.alert("Product Added - ", resp);
+    });
   };
   return (
     <div style={{ paddingTop: "150px" }}>

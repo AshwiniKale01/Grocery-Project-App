@@ -32,22 +32,23 @@ const AllEmployees = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee, index) => (
-            <tr key={index}>
-              <th scope="row">{employee.id}</th>
-              <td>{employee.firstname}</td>
-              <td>{employee.lastname}</td>
-              <td>{employee.email}</td>
-              <td>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDeleteEmployee(employee.id)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {employees.length > 0 &&
+            employees.map((employee, index) => (
+              <tr key={index}>
+                <th scope="row">{employee.id}</th>
+                <td>{employee.firstname}</td>
+                <td>{employee.lastname}</td>
+                <td>{employee.email}</td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDeleteEmployee(employee.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

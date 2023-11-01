@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AdminLogin.module.css";
-import { getProductById } from "../../services/adminService";
+import { getProductById, updateProduct } from "../../services/adminService";
 
 const AddProduct = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [image, setImage] = useState("");
+  const [productId, setProductId] = useEffect("");
 
   useEffect(() => {
-    const product = getProductById(2);
-    setName(product.name);
-    setPrice(product.price);
-    setQuantity(product.quantity);
-    setImage(product.imaage);
+    setProductId("");
+    getProductById(productId).then((product) => {
+      setName(product.name);
+      setPrice(product.price);
+      setQuantity(product.quantity);
+      setImage(product.imaage);
+    });
   }, []);
 
   const handleAddProduct = (event) => {
     event.preventDefault();
+    updateProduct(productId, {
+      id: productId,
+      name,
+      price,
+      quantity,
+      image,
+    }).then((resp) => {
+      window.alert("Product Updated - ", resp);
+    });
   };
   return (
     <div style={{ paddingTop: "150px" }}>

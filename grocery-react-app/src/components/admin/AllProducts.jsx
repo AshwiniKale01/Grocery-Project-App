@@ -35,40 +35,41 @@ const AllProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product, index) => (
-            <tr key={index}>
-              <th scope="row">{product.id}</th>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.quantity}</td>
-              <td>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="img img-thumbnail"
-                  width={45}
-                />
-              </td>
-              <td>
-                <button className="btn btn-primary">
-                  <Link
-                    className="nav-link active"
-                    aria-current="page"
-                    to="/admin/dashboard/updateProduct"
+          {products.length > 0 &&
+            products.map((product, index) => (
+              <tr key={index}>
+                <th scope="row">{product.id}</th>
+                <td>{product.name}</td>
+                <td>{product.price}</td>
+                <td>{product.quantity}</td>
+                <td>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="img img-thumbnail"
+                    width={45}
+                  />
+                </td>
+                <td>
+                  <button className="btn btn-primary">
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/admin/dashboard/updateProduct"
+                    >
+                      Update
+                    </Link>
+                  </button>
+                  &nbsp;
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDeleteProduct(product.id)}
                   >
-                    Update
-                  </Link>
-                </button>
-                &nbsp;
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDeleteProduct(product.id)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
