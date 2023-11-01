@@ -1,0 +1,11 @@
+.formContainer{
+    padding-top: 150px;
+}
+
+.formBorders{
+    border: 2px solid;
+    border-bottom-color: red;
+    border-top-color: blue;
+    border-left-color: yellow;
+    border-right-color: green;
+}
