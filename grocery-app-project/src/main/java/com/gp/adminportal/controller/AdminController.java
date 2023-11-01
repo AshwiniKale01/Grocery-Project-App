@@ -28,7 +28,7 @@ import com.gp.common.Orders;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin
+@CrossOrigin(origins={"*"})
 public class AdminController {
 
     @Autowired
@@ -98,7 +98,7 @@ public class AdminController {
     	List<Products> productList =  adminService.getAallProducts();
           return ResponseEntity.status(200).body(productList);  
       }
-    @GetMapping("/getAallEmployees")
+    @GetMapping("/getAllEmployees")
     public ResponseEntity<List<Employee>> getAallEmployees() {
     	List<Employee> employeeList =  adminService.getAallEmployees();
           return ResponseEntity.status(200).body(employeeList);  

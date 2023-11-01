@@ -1,17 +1,17 @@
-package com.gp.Service;
+package com.gp.employee.Service;
 
 public interface EmployeesService {
 	
-	String signIn(String employeeId, String password);
+	String signIn(int employeeId, String password);
 	
-	void sendRequestToIncreaseProductQuantity(long productId, int quantity);
+	void sendRequestToIncreaseProductQuantity(int productId, int quantity);
 	
 	
-	void updateOrderStatus(long orderId, String newStatus);
+	void updateOrderStatus(int orderId, String newStatus);
 	
-	void unlockUserAccount(long userId);
+	void unlockUserAccount(int userId);
 	
-	void editEmployeePassword(long employeeId, String newPassword);
+	void editEmployeePassword(int employeeId, String newPassword);
 	 
 	
 	

@@ -1,4 +1,4 @@
-package com.gp.ServiceImpl;
+package com.gp.employee.ServiceImpl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,22 +7,29 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gp.Service.EmployeesService;
-import com.gp.beans.Employees;
+import com.gp.adminportal.bean.Products;
+import com.gp.adminportal.dao.ProductsDao;
+import com.gp.common.Orders;
+import com.gp.common.dao.OrderDao;
+import com.gp.employee.Dao.EmployeesDao;
+import com.gp.employee.Service.EmployeesService;
+import com.gp.employee.beans.Employees;
+import com.gp.users.beans.Users;
+import com.gp.users.dao.UsersDao;
 
 import jakarta.persistence.criteria.Order;
 
 @Service
 public class EmployeeServiceImpl implements EmployeesService {
 	@Autowired
-	private ProductDao productDao;
+	private ProductsDao productDao;
 
 	@Override
-	public void sendRequestToIncreaseProductQuantity(long productId, int quantity) {
-		Optional<Product> productOptional = productDao.findById(productId);
+	public void sendRequestToIncreaseProductQuantity(int productId, int quantity) {
+		Optional<Products> productOptional = productDao.findById(productId);
 
 		if (productOptional.isPresent()) {
-			Product product = productOptional.get();
+			Products product = productOptional.get();
 			product.setQuantity(product.getQuantity() + quantity);
 			productDao.save(product);
 		} else {
@@ -34,11 +41,11 @@ public class EmployeeServiceImpl implements EmployeesService {
 	private OrderDao orderDao;
 
 	@Override
-	public void updateOrderStatus(long orderId, String newStatus) {
-		Optional<Order> orderOptional = orderDao.findById(orderId);
+	public void updateOrderStatus(int orderId, String newStatus) {
+		Optional<Orders> orderOptional = orderDao.findById(orderId);
 
 		if (orderOptional.isPresent()) {
-			Order order = orderOptional.get();
+			Orders order = orderOptional.get();
 
 			if (isValidOrderStatus(newStatus)) {
 				order.setStatus(newStatus);
@@ -58,16 +65,16 @@ public class EmployeeServiceImpl implements EmployeesService {
 	}
 
 	@Autowired
-	private UserDao userDao;
+	private UsersDao userDao;
 
 	@Override
-	public void unlockUserAccount(long userId) {
-		Optional<User> userOptional = userDao.findById(userId);
+	public void unlockUserAccount(int userId) {
+		Optional<Users> userOptional = userDao.findById(userId);
 
 		if (userOptional.isPresent()) {
-			User user = userOptional.get();
+			Users user = userOptional.get();
 
-			user.setAccountLocked(false);
+			user.setAccount_locked(false);
 			userDao.save(user);
 		} else {
 			System.out.println("user with given id is not availble");
@@ -75,10 +82,10 @@ public class EmployeeServiceImpl implements EmployeesService {
 	}
 
 	@Autowired
-	private Employees employeeDao;
+	private EmployeesDao employeeDao;
 
 	@Override
-	public void editEmployeePassword(long employeeId, String newPassword) {
+	public void editEmployeePassword(int employeeId, String newPassword) {
 		Optional<Employees> employeeOptional = employeeDao.findById(employeeId);
 
 		if (employeeOptional.isPresent()) {
@@ -92,7 +99,7 @@ public class EmployeeServiceImpl implements EmployeesService {
 	}
 
 	@Override
-	public String signIn(String employeeId, String password) {
+	public String signIn(int employeeId, String password) {
 		Optional<Employees> employeeOptional = employeeDao.findById(employeeId);
 
 		if (employeeOptional.isPresent()) {

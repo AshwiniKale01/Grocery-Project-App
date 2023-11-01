@@ -78,4 +78,12 @@ public class UsersServiceImp implements UsersService {
 		return user;
 	}
 
+	@Override
+	public void unlockUserAccount(int userId) {
+		// TODO Auto-generated method stub
+		Users user =usersDao.findById(userId).get();
+		user.setAccount_locked(false);
+		usersDao.save(user);
+	}
+
 }

@@ -1,4 +1,4 @@
-package com.gp.beans;
+package com.gp.employee.beans;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
