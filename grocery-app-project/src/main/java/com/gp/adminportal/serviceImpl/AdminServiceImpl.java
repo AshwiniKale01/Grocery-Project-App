@@ -1,6 +1,9 @@
 package com.gp.adminportal.serviceImpl;
 
 
+import java.sql.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,10 @@ import com.gp.adminportal.dao.EmployeeRepository;
 import com.gp.adminportal.dao.ProductRepository;
 import com.gp.adminportal.exception.ProductNotFoundException;
 import com.gp.adminportal.service.AdminService;
+import com.gp.common.Orders;
+import com.gp.common.dao.OrderDao;
+
+import jakarta.persistence.criteria.Order;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -23,6 +30,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private AdminDao adminDao;
+	@Autowired
+	private OrderDao orderDao ;
 
 	@Override
 	public Employee saveEmployee( Employee employee) {
@@ -81,6 +90,12 @@ public class AdminServiceImpl implements AdminService {
 	        }
 
 	        return null; // Authentication failed
+	}
+
+	@Override
+	public List<Orders> dailyReport(Date date) {
+		return orderDao.findByOrderDate(date);
+		
 	}
 
 	
