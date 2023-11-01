@@ -6,10 +6,10 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Products = () => {
-  const [data, setData] = useState([]);
-  const [filter, setFilter] = useState(data);
+  const [filter, setFilter] = useState([]);
   const [loading, setLoading] = useState(false);
   let componentMounted = true;
 
@@ -22,10 +22,9 @@ const Products = () => {
   useEffect(() => {
     const getProducts = async () => {
       setLoading(true);
-      const response = await fetch("https://fakestoreapi.com/products/");
+      const response = await axios.get("http://localhost:9091/admin/getAllProducts");
       if (componentMounted) {
-        setData(await response.clone().json());
-        setFilter(await response.json());
+        setFilter(await response.data);
         setLoading(false);
       }
 

@@ -3,6 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
+import axios from "axios";
 
 
 const Product = () => {
@@ -19,8 +20,8 @@ const Product = () => {
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-      const data = await response.json();
+      const response = await axios.get(`http://localhost:9091/admin/product/${id}`);
+      const data = await response.data;
       setProduct(data);
       setLoading(false);
     };

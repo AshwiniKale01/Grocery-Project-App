@@ -93,7 +93,7 @@ public class AdminController {
           return ResponseEntity.status(200).body(orderList);  
       }
     
-    @GetMapping("/getAallProducts")
+    @GetMapping("/getAllProducts")
     public ResponseEntity<List<Products>> getAallProducts() {
     	List<Products> productList =  adminService.getAallProducts();
           return ResponseEntity.status(200).body(productList);  
