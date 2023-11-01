@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.gp.adminportal.bean.Admin;
 import com.gp.adminportal.bean.Employee;
-import com.gp.adminportal.bean.Product;
+import com.gp.adminportal.bean.Products;
 import com.gp.adminportal.dao.AdminDao;
 import com.gp.adminportal.dao.EmployeeRepository;
-import com.gp.adminportal.dao.ProductRepository;
+import com.gp.adminportal.dao.ProductsDao;
 import com.gp.adminportal.exception.ProductNotFoundException;
 import com.gp.adminportal.service.AdminService;
 import com.gp.common.Orders;
@@ -26,7 +26,7 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private EmployeeRepository EmployeeRepository;
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductsDao productRepository;
 	
 	@Autowired
 	private AdminDao adminDao;
@@ -52,15 +52,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-    public Product addProduct(Product product) {
+    public Products addProduct(Products product) {
         // Add validation and business logic as needed
         return productRepository.save(product);
     }
 
 	 @Override
-	    public Product updateProduct(int productId, Product product) throws ProductNotFoundException {
+	    public Products updateProduct(int productId, Products product) throws ProductNotFoundException {
 	        // Add validation and business logic as needed
-	        Product existingProduct = productRepository.findById(productId)
+	        Products existingProduct = productRepository.findById(productId)
 	                .orElseThrow(() -> new ProductNotFoundException("Product not found with ID: " + productId));
 
 	        // Update product attributes
@@ -75,7 +75,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
     public void deleteProduct(int productId) throws ProductNotFoundException {
         
-        Product product = productRepository.findById(productId)
+        Products product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with ID: " + productId));
 
         productRepository.delete(product);
@@ -93,9 +93,20 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Orders> dailyReport(Date date) {
-		return orderDao.findByOrderDate(date);
-		
+	public List<Orders> dailyReport(Date startDate,Date endDate) {
+		return orderDao.findByTimestampBetween(startDate,endDate);
+	}
+
+	@Override
+	public List<Products> getAallProducts() {
+		// TODO Auto-generated method stub
+		return productRepository.findAll();
+	}
+
+	@Override
+	public List<Employee> getAallEmployees() {
+		// TODO Auto-generated method stub
+		return EmployeeRepository.findAll();
 	}
 
 	

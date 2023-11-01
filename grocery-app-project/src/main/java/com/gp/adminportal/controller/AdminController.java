@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gp.adminportal.bean.Admin;
 import com.gp.adminportal.bean.Employee;
-import com.gp.adminportal.bean.Product;
+import com.gp.adminportal.bean.Products;
 import com.gp.adminportal.exception.ProductNotFoundException;
 import com.gp.adminportal.service.AdminService;
 import com.gp.common.Orders;
 
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin
 public class AdminController {
 
     @Autowired
@@ -35,7 +37,7 @@ public class AdminController {
     List<String> exceptions = new ArrayList<>();
 
     @PostMapping("/add-product" )
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+    public ResponseEntity<Products> addProduct(@RequestBody Products product) {
         // You can add validation and other logic here
     	product =adminService.addProduct(product);
         return ResponseEntity.status(200).body(product);
@@ -54,7 +56,7 @@ public class AdminController {
     }
     
     @PutMapping("/products/update/{productId}")
-    public ResponseEntity<String> updateProduct(@PathVariable int productId, @RequestBody Product product) {
+    public ResponseEntity<String> updateProduct(@PathVariable int productId, @RequestBody Products product) {
         // Implement product update logic
     	try {
 			adminService.updateProduct(productId, product);
@@ -85,10 +87,21 @@ public class AdminController {
         return ResponseEntity.status(200).body(admin);  
     }
     
-    @GetMapping()
-    public ResponseEntity<List<Orders>> dailyReport(@RequestParam Date date) {
-        List<Orders> orderList =  adminService.dailyReport(date);
+    @GetMapping("/getReports")
+    public ResponseEntity<List<Orders>> getReports(@RequestParam Date startDate,@RequestParam Date endDate) {
+        List<Orders> orderList =  adminService.dailyReport(startDate,endDate);
           return ResponseEntity.status(200).body(orderList);  
+      }
+    
+    @GetMapping("/getAallProducts")
+    public ResponseEntity<List<Products>> getAallProducts() {
+    	List<Products> productList =  adminService.getAallProducts();
+          return ResponseEntity.status(200).body(productList);  
+      }
+    @GetMapping("/getAallEmployees")
+    public ResponseEntity<List<Employee>> getAallEmployees() {
+    	List<Employee> employeeList =  adminService.getAallEmployees();
+          return ResponseEntity.status(200).body(employeeList);  
       }
 }
 

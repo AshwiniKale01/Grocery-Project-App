@@ -17,7 +17,10 @@ public interface OrderDao extends JpaRepository<Orders,Integer> {
 	@Query("select o from Orders o where o.user_id_ref =?1")
 	public List<Orders>findAllOrdersForUser(int user_id);
 
-	public List<Orders> findByOrderDate(Date date);
+//	@Query("select  from Orders o where o.user_id_ref =?1")
+//	public List<Orders> findByTimestampBetween(Date startDate, Date endDate);
 	
-
+	@Query(value = "SELECT * FROM orders o WHERE DATE(o.order_date) BETWEEN ?1 AND ?2", nativeQuery = true)
+    List<Orders> findByTimestampBetween(Date startDate, Date endDate);
+	
 }

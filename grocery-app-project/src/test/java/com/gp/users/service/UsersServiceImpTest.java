@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.gp.adminportal.bean.Product;
+import com.gp.adminportal.bean.Products;
 import com.gp.common.Orders;
 import com.gp.common.exceptionstored.ProductNotFoundException;
 import com.gp.users.beans.Cart;
@@ -76,7 +76,7 @@ class UsersServiceImpTest {
 	@Test
 	void findProductByIdTest() {
 		try {
-			Product product = cartService.findProductById(1);
+			Products product = cartService.findProductById(1);
 			System.out.println("____________");
 			System.out.println(product);
 			System.out.println("____________");
