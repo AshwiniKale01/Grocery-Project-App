@@ -1,7 +1,5 @@
 package com.gp.users.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -9,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.gp.adminportal.bean.Products;
 import com.gp.common.Orders;
-import com.gp.common.Products;
 import com.gp.common.exceptionstored.ProductNotFoundException;
 import com.gp.users.beans.Cart;
 import com.gp.users.beans.Users;

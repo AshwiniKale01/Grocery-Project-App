@@ -15,5 +15,6 @@ public interface UsersService {
 	
 	Users findUser(int user_id) throws UserNotFoundException;
 	Users editUser(int user_id,String password,String address,String phone_number,String email) throws UserNotFoundException;
+	void unlockUserAccount(int userId);
 	
 }

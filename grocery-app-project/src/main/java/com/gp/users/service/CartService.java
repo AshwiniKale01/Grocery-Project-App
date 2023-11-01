@@ -1,7 +1,9 @@
 package com.gp.users.service;
 
 import java.util.List;
-import com.gp.common.*;
+
+import com.gp.adminportal.bean.Products;
+import com.gp.common.Orders;
 import com.gp.common.exceptionstored.ProductNotFoundException;
 import com.gp.users.beans.Cart;
 

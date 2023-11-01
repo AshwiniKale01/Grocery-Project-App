@@ -1,20 +1,18 @@
 package com.gp.users.service;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
+import com.gp.adminportal.bean.Products;
+import com.gp.adminportal.dao.ProductsDao;
 import com.gp.common.OrderItems;
 import com.gp.common.Orders;
-import com.gp.common.Products;
 import com.gp.common.dao.CartDao;
 import com.gp.common.dao.OrderDao;
 import com.gp.common.dao.OrderItemsDao;
-import com.gp.common.dao.ProductsDao;
 import com.gp.common.exceptionstored.ProductNotFoundException;
 import com.gp.users.beans.Cart;
 import com.gp.users.beans.Users;

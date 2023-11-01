@@ -1,11 +1,15 @@
 package com.gp.common;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 public class Orders {
@@ -15,9 +19,11 @@ public class Orders {
 	private int user_id_ref;
 //	we can ommit this column as in MySQL our column has default current timestamp
 //	private TimeStamp order_date;
-//	private Timestamp order_date;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name= "order_date")
+	private Date orderDate;
 	private double total_amount;
-    private String status="Pending";
+    private String status;
 //	superclass constructor
 	public Orders() {
 		super();
@@ -32,7 +38,15 @@ public class Orders {
 		this.total_amount = total_amount;
 	}
 
-//getters and setters method
+public Date getOrder_date() {
+		return orderDate;
+	}
+
+	public void setOrder_date(Date order_date) {
+		this.orderDate = order_date;
+	}
+
+	//getters and setters method
 	public int getOrder_id() {
 		return order_id;
 	}
